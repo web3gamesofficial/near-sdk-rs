@@ -292,9 +292,6 @@ impl NonFungibleTokenCore for NonFungibleToken {
     ) {
         assert_one_yocto();
         let sender_id = env::predecessor_account_id();
-        if  sender_id !=  "drop.hhsviewer.near".to_string(){
-            env::panic(b"TRANSFER_NOT_SUPPORTED")
-        }
         self.internal_transfer(&sender_id, receiver_id.as_ref(), &token_id, approval_id, memo);
     }
 
@@ -308,9 +305,6 @@ impl NonFungibleTokenCore for NonFungibleToken {
     ) -> PromiseOrValue<bool> {
         assert_one_yocto();
         let sender_id = env::predecessor_account_id();
-        if  receiver_id.to_string() !=  "drop.hhsviewer.near".to_string(){
-            env::panic(b"TRANSFER_NOT_SUPPORTED")
-        }
         let (old_owner, old_approvals) =
             self.internal_transfer(&sender_id, receiver_id.as_ref(), &token_id, approval_id, memo);
         // Initiating receiver's call and the callback
